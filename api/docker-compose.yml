@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  api:
+    build: .
+    ports:
+      - "6000:6000"
+    command: rails s -b 0.0.0.0 -p 6000
+    depends_on:
+      - postgres
+    environment:
+      - DB_USERNAME=atm
+      - DB_PASSWORD=atm
+      - DB_HOST=postgres
+    volumes:
+      - ".:/home/backend/app"
+      - ".docker/bundle:/usr/local/bundle"
+      - "./config/entrypoint.sh:/usr/bin/entrypoint.sh"
+
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+    volumes:
+      - .docker/init/create_user.sql:/docker-entrypoint-initdb.d/000-data.sql
+      - .docker/db/.postgres/12/data:/var/lib/postgresql/data
