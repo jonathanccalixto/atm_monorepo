@@ -15,4 +15,10 @@ class Account < ApplicationRecord
   def deposit(params)
     transactions.build(params)
   end
+
+  def withdraw(params)
+    transaction = transactions.build(params)
+    transaction.value *= -1
+    transaction
+  end
 end
