@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'balance' => 'transactions#balance'
   post 'deposit' => 'transactions#deposit'
   post 'withdraw' => 'transactions#withdraw'
+  post 'transfer' => 'transactions#transfer'
 end

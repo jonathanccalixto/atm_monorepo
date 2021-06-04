@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :account
-  belongs_to :source, optional: true
+  belongs_to :source, class_name: 'Account', optional: true
 
   validate :balance_greater_than_or_equal_to_zero
 
