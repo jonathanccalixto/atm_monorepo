@@ -11,4 +11,8 @@ class Account < ApplicationRecord
   def balance
     transactions.sum(:value)
   end
+
+  def deposit(params)
+    transactions.build(params)
+  end
 end
