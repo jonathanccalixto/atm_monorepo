@@ -19,3 +19,5 @@ docker-compose.yml
 /api/tmp
 /api/docs
 /api/coverage
+
+/web/node_modules

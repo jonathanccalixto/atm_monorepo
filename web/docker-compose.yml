@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: yarn start
+    volumes:
+      - './yarn.lock:/home/node/app/yarn.lock'
+      - './node_modules:/home/node/app/node_modules'
+      - '.:/home/node/app/'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - REACT_API_HOST=localhost
+      - REACT_API_PORT=6000

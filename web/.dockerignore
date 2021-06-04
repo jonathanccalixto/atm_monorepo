@@ -1,0 +1,5 @@
+node_modules/
+.docker/
+!.docker/init/docker-entrypoint.sh
+docks
+tmp/
