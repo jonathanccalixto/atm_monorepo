@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Authenticable
+
   private
 
   def response_render_with(payload: {}, messages: [], status: :ok)
