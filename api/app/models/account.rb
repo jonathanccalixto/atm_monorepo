@@ -7,4 +7,8 @@ class Account < ApplicationRecord
   validates :account, presence: true,
                       uniqueness: { scope: :agency },
                       format: /\d{1,7}-\d/
+
+  def balance
+    transactions.sum(:value)
+  end
 end
