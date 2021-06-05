@@ -3,9 +3,13 @@ import { BrowserRouter } from 'react-router-dom'
 
 import Routes from './Routes'
 
+import Layout from './components/Layout'
+
 const App = () => (
   <BrowserRouter>
-    <Routes />
+    <Layout>
+      <Routes />
+    </Layout>
   </BrowserRouter>
 )
 
