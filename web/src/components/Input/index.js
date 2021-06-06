@@ -44,6 +44,9 @@ const Input = forwardRef(function Input(
     setValue: value => {
       if (inputRef.current) inputRef.current.value = value
     },
+    focus: () => {
+      inputRef.current.focus()
+    },
   }))
 
   return (
