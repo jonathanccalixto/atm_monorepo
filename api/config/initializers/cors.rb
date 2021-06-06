@@ -14,3 +14,18 @@
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end
 # end
+
+Rails.application.config.hosts << 'localhost:3000'
+Rails.application.config.hosts << 'localhost'
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    # origins *ENV.fetch('CORS_ORIGIN') { '*' }.split(',')
+    origins '*'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      expose: ['X-Access-Token']
+  end
+end
