@@ -1,9 +1,51 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-// import { Container } from './styles';
+import { AccountModel } from '../../models/AccountModel'
+
+import { Container, Link } from './styles'
 
 const Balance = () => {
-  return <div>Balance</div>
+  const [loading, setLoading] = useState(true)
+  const [value, setValue] = useState(0)
+
+  const currency = useMemo(
+    () =>
+      new Intl.NumberFormat('us-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(value),
+    [value],
+  )
+
+  useEffect(() => {
+    AccountModel.balance().then(([, { balance }]) => {
+      setLoading(false)
+      setValue(balance)
+    })
+  }, [])
+
+  return (
+    <Container>
+      <form>
+        {loading ? (
+          <span>Loading your balance</span>
+        ) : (
+          <span>
+            Your balance is{' '}
+            <strong className={value < 0 && 'negative'}> {currency} </strong>
+          </span>
+        )}
+
+        <Link to="/" position={6} side="left">
+          Back
+        </Link>
+
+        <Link to="/" position={6} side="right">
+          Back
+        </Link>
+      </form>
+    </Container>
+  )
 }
 
 export default Balance
