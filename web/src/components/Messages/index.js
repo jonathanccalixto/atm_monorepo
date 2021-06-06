@@ -7,18 +7,16 @@ const Messages = ({ error, info, success, warning }) => {
   return (
     <Container>
       {info.map((message, index) => (
-        <Info key={index}>{message}</Info>
+        <Info key={1000 + index}>{message}</Info>
       ))}
       {warning.map((message, index) => (
-        <Warning key={index}>{message}</Warning>
+        <Warning key={2000 + index}>{message}</Warning>
       ))}
       {success.map((message, index) => (
-        <Success key={index}>{message}</Success>
+        <Success key={3000 + index}>{message}</Success>
       ))}
       {error.map((message, index) => (
-        <>
-          <Error key={index * 1}>{message}</Error>
-        </>
+        <Error key={4000 + index}>{message}</Error>
       ))}
     </Container>
   )
