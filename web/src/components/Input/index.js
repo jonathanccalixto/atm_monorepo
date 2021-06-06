@@ -53,6 +53,7 @@ const Input = forwardRef(function Input(
     <Container isFocused={isFocused} className={className} style={style}>
       <label htmlFor={id}>{labelText}</label>
       <input
+        autoComplete="off"
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={inputRef}
