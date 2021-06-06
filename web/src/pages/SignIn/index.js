@@ -41,7 +41,6 @@ const SignIn = () => {
 
         history.push('/')
       } else {
-        delete global.token
         setSuccessMessages([])
         setErrorMessages(messages)
       }
