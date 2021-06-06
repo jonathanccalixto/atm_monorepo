@@ -14,7 +14,7 @@ const Routes = () => (
     <Route path="/sign_in" component={SignIn} />
     <Route path="/sign_up" component={SignUp} />
 
-    <Route path="/" component={Dashboard} />
+    <Route path="/" exact component={Dashboard} />
     <Route path="/balance" component={Balance} />
     <Route path="/deposit" component={Deposit} />
     <Route path="/withdraw" component={Withdraw} />
