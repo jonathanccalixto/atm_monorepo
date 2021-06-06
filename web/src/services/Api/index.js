@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ApiError } from './error'
 
 const host = process.env.REACT_APP_API_HOST ?? 'http://localhost'
-const port = process.env.REACT_APP_API_PORT ?? 6000
+const port = process.env.REACT_APP_API_PORT ?? 3003
 
 const api = axios.create({ baseURL: `${host}:${port}` })
 

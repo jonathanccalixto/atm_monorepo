@@ -16,16 +16,16 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
-      - REACT_API_HOST=api
-      - REACT_API_PORT=6000
+      - REACT_APP_API_HOST=http://localhost
+      - REACT_APP_API_PORT=3003
 
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
     ports:
-      - "6000:6000"
-    command: rails s -b 0.0.0.0 -p 6000
+      - "3003:3003"
+    command: rails s -b 0.0.0.0 -p 3003
     depends_on:
       - postgres
     environment:
@@ -36,11 +36,12 @@ services:
       - "./api:/home/backend/app"
       - "./api/.docker/bundle:/usr/local/bundle"
       - "./api/./config/entrypoint.sh:/usr/bin/entrypoint.sh"
+    tty: true
 
   postgres:
     image: postgres:13-alpine
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker

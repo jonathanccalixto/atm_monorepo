@@ -13,5 +13,5 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
-      - REACT_API_HOST=localhost
-      - REACT_API_PORT=6000
+      - REACT_APP_API_HOST=http://localhost
+      - REACT_APP_API_PORT=3003
