@@ -15,7 +15,7 @@ export const SignInModel = {
         return [false, payload, messages]
       }
 
-      throw error
+      return [false, {}, ['Unexpected error, try again later']]
     }
   },
 }
