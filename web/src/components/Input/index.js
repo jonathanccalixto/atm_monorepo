@@ -28,7 +28,13 @@ const Input = forwardRef(function Input(
   }, [])
 
   useEffect(() => {
-    if (mask) InputMask({ mask }).mask(inputRef.current)
+    if (!mask) return
+
+    if (mask === 'currency') {
+      InputMask({ alias: mask }).mask(inputRef.current)
+    } else {
+      InputMask({ mask }).mask(inputRef.current)
+    }
   }, [mask])
 
   useImperativeHandle(ref, () => ({
