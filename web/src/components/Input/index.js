@@ -11,11 +11,11 @@ import PropTypes from 'prop-types'
 
 import { Container } from './styles'
 
-const Input = (
+const Input = forwardRef(function Input(
   { id, className, label: labelText, mask, style, type, value },
   ref,
-) => {
-  const inputRef = useRef(null)
+) {
+  const inputRef = useRef()
 
   const [isFocused, setIsFocused] = useState(false)
 
@@ -31,11 +31,17 @@ const Input = (
     if (mask) InputMask({ mask }).mask(inputRef.current)
   }, [mask])
 
+  // eslint-disable-next-line no-console
+  console.log({ ref })
+  // eslint-disable-next-line no-console
+  console.log({ inputRef })
   useImperativeHandle(ref, () => ({
-    get value() {
-      inputRef.current?.value
+    getValue: () => {
+      // eslint-disable-next-line no-console
+      console.log({ inputRef })
+      return inputRef.current?.value
     },
-    set value(value) {
+    setValue: value => {
       if (inputRef.current) inputRef.current.value = value
     },
   }))
@@ -53,7 +59,7 @@ const Input = (
       />
     </Container>
   )
-}
+})
 
 Input.propTypes = {
   id: PropTypes.string.isRequired,
@@ -75,4 +81,4 @@ Input.defaultProps = {
   style: {},
 }
 
-export default forwardRef(Input)
+export default Input
