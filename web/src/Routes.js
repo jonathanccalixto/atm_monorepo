@@ -12,7 +12,7 @@ import Withdraw from './pages/Withdraw'
 const Routes = () => (
   <Switch>
     <Route path="/sign_in" component={SignIn} />
-    <Route path="/sig_nup" component={SignUp} />
+    <Route path="/sign_up" component={SignUp} />
 
     <Route path="/" component={Dashboard} />
     <Route path="/balance" component={Balance} />
