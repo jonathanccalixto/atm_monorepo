@@ -19,30 +19,35 @@ const SignIn = () => {
   const [successMessages, setSuccessMessages] = useState([])
   const [errorMessages, setErrorMessages] = useState([])
 
-  const handleSubmit = useCallback(async event => {
-    event.preventDefault()
+  const handleSubmit = useCallback(
+    async event => {
+      event.preventDefault()
 
-    const signIn = {
-      account: accountRef.current?.getValue?.(),
-      agency: agencyRef.current?.getValue?.(),
-      password: passwordRef.current?.getValue?.(),
-    }
+      const signIn = {
+        account: accountRef.current?.getValue?.(),
+        agency: agencyRef.current?.getValue?.(),
+        password: passwordRef.current?.getValue?.(),
+      }
 
-    const [success, { token }, messages] = await SignInModel.signIn({ signIn })
+      const [success, { token }, messages] = await SignInModel.signIn({
+        signIn,
+      })
 
-    if (success) {
-      Api.setAuthorization(token)
+      if (success) {
+        Api.setAuthorization(token)
 
-      setSuccessMessages(messages)
-      setErrorMessages([])
+        setSuccessMessages(messages)
+        setErrorMessages([])
 
-      history.push('/')
-    } else {
-      delete global.token
-      setSuccessMessages([])
-      setErrorMessages(messages)
-    }
-  }, [])
+        history.push('/')
+      } else {
+        delete global.token
+        setSuccessMessages([])
+        setErrorMessages(messages)
+      }
+    },
+    [history],
+  )
 
   return (
     <Container>
