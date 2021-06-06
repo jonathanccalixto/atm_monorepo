@@ -31,14 +31,8 @@ const Input = forwardRef(function Input(
     if (mask) InputMask({ mask }).mask(inputRef.current)
   }, [mask])
 
-  // eslint-disable-next-line no-console
-  console.log({ ref })
-  // eslint-disable-next-line no-console
-  console.log({ inputRef })
   useImperativeHandle(ref, () => ({
     getValue: () => {
-      // eslint-disable-next-line no-console
-      console.log({ inputRef })
       return inputRef.current?.value
     },
     setValue: value => {
