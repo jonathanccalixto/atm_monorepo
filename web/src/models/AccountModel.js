@@ -1,38 +1,21 @@
 import Api from '../services/Api'
-import { ApiError } from '../services/Api/error'
+
+import { handleResponse } from './ApplicationModel'
 
 export const AccountModel = {
   balance: async () => {
-    try {
-      const response = await Api.get('/balance')
-      const { payload, messages } = response.data
+    const [success, payload, messages] = await handleResponse(() =>
+      Api.get('/balance'),
+    )
 
-      return [true, payload, messages]
-    } catch (error) {
-      if (error instanceof ApiError) {
-        const { payload, messages } = error.response.data
-
-        return [false, payload, messages]
-      }
-
-      return [false, {}, ['Unexpected error, try again later']]
-    }
+    return [success, payload, messages]
   },
 
   deposit: async data => {
-    try {
-      const response = await Api.post('/deposit', { data })
-      const { payload, messages } = response.data
+    const [success, payload, messages] = await handleResponse(() =>
+      Api.post('/deposit', { data }),
+    )
 
-      return [true, payload, messages]
-    } catch (error) {
-      if (error instanceof ApiError) {
-        const { payload, messages } = error.response.data
-
-        return [false, payload, messages]
-      }
-
-      return [false, {}, ['Unexpected error, try again later']]
-    }
+    return [success, payload, messages]
   },
 }

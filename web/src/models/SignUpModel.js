@@ -1,21 +1,13 @@
 import Api from '../services/Api'
-import { ApiError } from '../services/Api/error'
+
+import { handleResponse } from './ApplicationModel'
 
 export const SignUpModel = {
   signUp: async data => {
-    try {
-      const response = await Api.post('/sign_up', { data })
-      const { payload, messages } = response.data
+    const [success, payload, messages] = await handleResponse(() =>
+      Api.post('/sign_up', { data }),
+    )
 
-      return [true, payload, messages]
-    } catch (error) {
-      if (error instanceof ApiError) {
-        const { payload, messages } = error.response.data
-
-        return [false, payload, messages]
-      }
-
-      return [false, {}, ['Unexpected error, try again later']]
-    }
+    return [success, payload, messages]
   },
 }
