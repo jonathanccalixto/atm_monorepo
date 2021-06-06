@@ -9,7 +9,7 @@ export const Container = styled.div`
   justify-content: space-around;
 
   label {
-    width: 15%;
+    width: 25%;
 
     align-items: flex-start;
     display: flex;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     border-bottom: 1px solid var(--primary-border);
     color: var(--primary-font);
     padding: 0 15px;
-    width: 85%;
+    width: 75%;
   }
 
   ${({ isFocused }) =>

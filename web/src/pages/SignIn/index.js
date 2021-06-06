@@ -68,11 +68,11 @@ const SignIn = () => {
           type="password"
         />
 
-        <Button type="submit" position={4} side="left">
+        <Button type="submit" position={6} side="left">
           Confirm
         </Button>
 
-        <Link to="/sign_up" position={4} side="right">
+        <Link to="/sign_up" position={6} side="right">
           Sign Up
         </Link>
       </form>

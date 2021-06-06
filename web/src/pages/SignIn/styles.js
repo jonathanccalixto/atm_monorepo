@@ -25,7 +25,7 @@ const touch = css`
 
   ${({ position }) =>
     css`
-      top: calc(${position} * 78px);
+      bottom: calc(${position - 6} * 78px * -1);
     `}
   ${({ side }) => css`
     ${side}: 76px;
