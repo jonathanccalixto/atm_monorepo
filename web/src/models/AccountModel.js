@@ -18,4 +18,21 @@ export const AccountModel = {
       return [false, {}, ['Unexpected error, try again later']]
     }
   },
+
+  deposit: async data => {
+    try {
+      const response = await Api.post('/deposit', { data })
+      const { payload, messages } = response.data
+
+      return [true, payload, messages]
+    } catch (error) {
+      if (error instanceof ApiError) {
+        const { payload, messages } = error.response.data
+
+        return [false, payload, messages]
+      }
+
+      return [false, {}, ['Unexpected error, try again later']]
+    }
+  },
 }
