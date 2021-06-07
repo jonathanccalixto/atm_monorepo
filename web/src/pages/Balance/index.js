@@ -17,6 +17,11 @@ const Balance = () => {
     [value],
   )
 
+  const balanceClassName = useMemo(
+    () => (value < 0 ? 'negative' : 'positice'),
+    [value],
+  )
+
   useEffect(() => {
     AccountModel.balance().then(([, { balance }]) => {
       setLoading(false)
@@ -32,7 +37,7 @@ const Balance = () => {
         ) : (
           <span>
             Your balance is{' '}
-            <strong className={value < 0 && 'negative'}> {currency} </strong>
+            <strong className={balanceClassName}> {currency} </strong>
           </span>
         )}
 
