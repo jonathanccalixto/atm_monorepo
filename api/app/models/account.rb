@@ -13,12 +13,10 @@ class Account < ApplicationRecord
   end
 
   def deposit(params)
-    transactions.build(params)
+    transactions.build(params.merge(kind: :credit))
   end
 
   def withdraw(params)
-    transaction = transactions.build(params)
-    transaction.value *= -1
-    transaction
+    transactions.build(params.merge(kind: :debit))
   end
 end
