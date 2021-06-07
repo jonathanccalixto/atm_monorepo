@@ -18,4 +18,12 @@ export const AccountModel = {
 
     return [success, payload, messages]
   },
+
+  withdraw: async data => {
+    const [success, payload, messages] = await handleResponse(() =>
+      Api.post('/withdraw', { data }),
+    )
+
+    return [success, payload, messages]
+  },
 }
