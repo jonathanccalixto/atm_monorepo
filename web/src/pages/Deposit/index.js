@@ -18,9 +18,9 @@ const Deposit = () => {
 
     if (!valueRef.current) return
 
-    const deposit = {
-      value: valueRef.current.getValue().replace(',', ''),
-    }
+    const value = Number(valueRef.current.getValue().replace(',', ''))
+
+    const deposit = { value }
 
     const [success, , messages] = await AccountModel.deposit({ deposit })
 
