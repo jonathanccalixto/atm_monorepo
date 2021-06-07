@@ -1,11 +1,11 @@
 class TransferForm
   include ActiveModel::Model
 
-  attr_accessor :source, :destination, :value
+  attr_accessor :source, :agency, :account, :value
 
-  validates :source, :destination, presence: true
+  validates :source, :agency, :account, presence: true
   validates :value, presence: true, numericality: { greater_than: 0.0 }
-  validate :source_with_balance
+  validate :destination_association_exists, :source_with_balance
 
   def transfer
     return false unless valid?
@@ -23,12 +23,31 @@ class TransferForm
 
   private
 
+  def parsed_value
+    @parsed_value ||= BigDecimal(value)
+  end
+
+  def destination
+    @destination ||= Account.find_by(agency: agency, account: account)
+  end
+
   def debit
-    @debit ||= source.withdraw(value: value, source: destination)
+    @debit ||= source.withdraw(value: -parsed_value, kind: :debit, source: destination)
   end
 
   def credit
-    @credit ||= destination.deposit(value: value, source: source)
+    @credit ||= destination.deposit(value: parsed_value, kind: :credit, source: source)
+  end
+
+  def destination_association_exists
+    return true if agency.blank? || account.blank?
+
+    if destination.nil?
+      errors.add :agency, :invalid
+      errors.add :account, :invalid
+    elsif destination == source
+      errors.add :base, :invalid, message: 'Cannot transfer to your own account'
+    end
   end
 
   def source_with_balance

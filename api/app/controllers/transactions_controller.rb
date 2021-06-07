@@ -30,10 +30,7 @@ class TransactionsController < ApplicationController
   end
 
   def transfer
-    account = Account.find_by(destination_params)
-
-    transaction_transfer = TransferForm.new(source: current_account, destination: account)
-    transaction_transfer.attributes = transfer_params
+    transaction_transfer = TransferForm.new transfer_params.merge(source: current_account)
 
     if transaction_transfer.transfer
       response_render_with payload: { balance: current_account.balance },
@@ -56,10 +53,6 @@ class TransactionsController < ApplicationController
   end
 
   def transfer_params
-    params.require(:transfer).permit(:value)
-  end
-
-  def destination_params
-    params.require(:transfer).permit(:agency, :account)
+    params.require(:transfer).permit(:value, :agency, :account)
   end
 end
