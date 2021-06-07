@@ -18,7 +18,7 @@ const Routes = () => (
     <Route path="/balance" component={Balance} />
     <Route path="/deposit" component={Deposit} />
     <Route path="/withdraw" component={Withdraw} />
-    <Route path="/Tranfer" component={Transfer} />
+    <Route path="/transfer" component={Transfer} />
 
     <Redirect to="/" />
   </Switch>

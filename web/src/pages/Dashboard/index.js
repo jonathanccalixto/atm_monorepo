@@ -37,7 +37,7 @@ const Dashboard = () => {
         </Link>
 
         <Link to="/transfer" position={3} side="right">
-          Transer
+          Transfer
         </Link>
 
         <Button type="button" position={6} side="left" onClick={handleSignOut}>

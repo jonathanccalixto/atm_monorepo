@@ -26,4 +26,12 @@ export const AccountModel = {
 
     return [success, payload, messages]
   },
+
+  transfer: async data => {
+    const [success, payload, messages] = await handleResponse(() =>
+      Api.post('/transfer', { data }),
+    )
+
+    return [success, payload, messages]
+  },
 }
