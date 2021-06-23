@@ -1,28 +1,25 @@
 import React, { useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
 
-import Api from '../../services/Api'
+import { useAuth } from '../../contexts/AuthContext'
 
 import { Button, Container, Link } from './styles'
 
 const Dashboard = () => {
-  const history = useHistory()
+  const { signOut, user } = useAuth()
 
   const handleSignOut = useCallback(
     async event => {
       event.preventDefault()
 
-      Api.setAuthorization(undefined)
-
-      history.push('/sign_in')
+      signOut()
     },
-    [history],
+    [signOut],
   )
 
   return (
     <Container>
       <form>
-        <span>Welcome !</span>
+        <span>Welcome {user.name}!</span>
 
         <Link to="/balance" position={0} side="left">
           Balance

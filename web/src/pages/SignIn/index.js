@@ -1,11 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+
+import { useAuth } from '../../contexts/AuthContext'
 
 import Input from '../../components/Input'
 import Messages from '../../components/Messages'
-
-import { SignInModel } from '../../models/SignInModel'
-import Api from '../../services/Api'
 
 import { Button, Container, Link } from './styles'
 
@@ -14,7 +12,7 @@ const SignIn = () => {
   const accountRef = useRef()
   const passwordRef = useRef()
 
-  const history = useHistory()
+  const { signIn } = useAuth()
 
   const [successMessages, setSuccessMessages] = useState([])
   const [errorMessages, setErrorMessages] = useState([])
@@ -23,29 +21,18 @@ const SignIn = () => {
     async event => {
       event.preventDefault()
 
-      const signIn = {
-        account: accountRef.current?.getValue?.(),
-        agency: agencyRef.current?.getValue?.(),
-        password: passwordRef.current?.getValue?.(),
-      }
+      const [success, , messages] = await signIn(
+        agencyRef.current?.getValue?.(),
+        accountRef.current?.getValue?.(),
+        passwordRef.current?.getValue?.(),
+      )
 
-      const [success, { token }, messages] = await SignInModel.signIn({
-        signIn,
-      })
-
-      if (success) {
-        Api.setAuthorization(token)
-
-        setSuccessMessages(messages)
-        setErrorMessages([])
-
-        history.push('/')
-      } else {
+      if (!success) {
         setSuccessMessages([])
         setErrorMessages(messages)
       }
     },
-    [history],
+    [signIn],
   )
 
   return (

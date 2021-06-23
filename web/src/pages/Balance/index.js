@@ -1,12 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
 import { AccountModel } from '../../models/AccountModel'
+import { useAuth } from '../../contexts/AuthContext'
 
 import { Container, Link } from './styles'
 
 const Balance = () => {
   const [loading, setLoading] = useState(true)
   const [value, setValue] = useState(0)
+
+  const { user } = useAuth()
 
   const currency = useMemo(
     () =>
@@ -35,10 +38,13 @@ const Balance = () => {
         {loading ? (
           <span>Loading your balance</span>
         ) : (
-          <span>
-            Your balance is{' '}
-            <strong className={balanceClassName}> {currency} </strong>
-          </span>
+          <>
+            <span>Welcome {user.name}!</span>
+            <span>
+              Your balance is{' '}
+              <strong className={balanceClassName}> {currency} </strong>
+            </span>
+          </>
         )}
 
         <Link to="/" position={6} side="left">

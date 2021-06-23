@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if sign_in.authenticated?
       messages = ['Sign in performed successfully']
-      payload = { token: sign_in.token }
+      payload = { token: sign_in.token, account: sign_in.account_model }
       status = :created
     else
       messages = sign_in.errors.full_messages

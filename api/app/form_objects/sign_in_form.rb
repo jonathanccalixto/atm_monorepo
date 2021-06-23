@@ -17,14 +17,14 @@ class SignInForm
     true
   end
 
-  private
-
-  attr_writer :token
-
   def account_model(force_reload: false)
     @account_model = nil if force_reload
     @account_model ||= Account.find_by(agency: agency, account: account, password: password)
   end
+
+  private
+
+  attr_writer :token
 
   def credentials_are_valid
     return if agency.blank? || account.blank? || password.blank?
